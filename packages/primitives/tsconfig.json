@@ -1,0 +1,6 @@
+{
+    "extends": "@octa/ts-config/react-library",
+    "include": [
+        "src"
+    ]
+}

@@ -1,0 +1,18 @@
+{
+  "name": "@octa/ts-config",
+  "version": "1.0.0",
+  "description": "",
+  "private": true,
+  "main": "index.js",
+  "exports": {
+    "./base": "./tsconfig.base.json",
+    "./react-library": "./tsconfig.react-library.json"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "packageManager": "pnpm@10.30.1"
+}

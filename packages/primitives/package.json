@@ -1,0 +1,36 @@
+{
+  "name": "@octa/primitives",
+  "version": "1.0.0",
+  "description": "",
+  "main": "dist/index.cjs",
+  "module": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "sideEffects": false,
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.mjs",
+      "require": "./dist/index.js"
+    }
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "tsup src/index.ts --format esm,cjs --dts --clean"
+  },
+  "peerDependencies": {
+    "react": ">=18"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "packageManager": "pnpm@10.30.1",
+  "devDependencies": {
+    "@octa/ts-config": "workspace:*",
+    "@types/react": "^19.2.14",
+    "@types/react-dom": "^19.2.3",
+    "react": "^19.2.4",
+    "react-dom": "^19.2.4",
+    "tsup": "^8.5.1",
+    "typescript": "^5.9.3"
+  }
+}
