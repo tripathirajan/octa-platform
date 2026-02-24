@@ -5,3 +5,4 @@ export * from "./useControllableState";
 export * from "./useId";
 export * from "./createPrimitiveElement";
 export * from "./useCompositeNavigation";
+export * from "./useCollection";

@@ -3,7 +3,7 @@ import { useCompositeNavigation } from "../../internal/useCompositeNavigation";
 import { Box } from "../../layout/Box";
 import { DropdownProviderInternal } from "./DropdownContext";
 import type { DropdownItemMeta } from "./DropdownContext";
-import { CollectionItem, useCollection } from "./useCollection";
+import { CollectionItem, useCollection } from "../../internal/useCollection";
 
 type DropdownContentProps = {
     children: React.ReactNode;
