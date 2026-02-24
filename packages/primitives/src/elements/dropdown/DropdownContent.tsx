@@ -1,0 +1,53 @@
+import * as React from "react";
+import { useCompositeNavigation } from "../../internal/useCompositeNavigation";
+import { Box } from "../../layout/Box";
+import { DropdownProviderInternal } from "./DropdownContext";
+import type { DropdownItemMeta } from "./DropdownContext";
+import { CollectionItem, useCollection } from "./useCollection";
+
+type DropdownContentProps = {
+    children: React.ReactNode;
+    open: boolean;
+    close: () => void;
+};
+
+export const DropdownContent: React.FC<DropdownContentProps> = ({ open, close, children }) => {
+    const { items, register, getIndex } = useCollection<DropdownItemMeta>();
+
+    const {
+        activeIndex,
+        setActiveIndex,
+        onKeyDown,
+    } = useCompositeNavigation({
+        itemCount: items.length,
+        isItemDisabled: (i) => items[i]?.disabled as boolean,
+        onSelect: (index) => {
+            items[index]?.meta?.onSelect?.();
+            close();
+        },
+        onEscape: close,
+    });
+
+    // Focus sync
+    React.useEffect(() => {
+        if (!open) return;
+        items[activeIndex]?.ref.current?.focus();
+    }, [open, activeIndex, items]);
+
+    if (!open) return null;
+
+    return (
+        <DropdownProviderInternal value={{
+            registerItem: ({ meta, ...rest }) => register({ meta: { ...meta }, ...rest } as CollectionItem<DropdownItemMeta>),
+            getIndex,
+            activeIndex,
+            setActiveIndex,
+            close,
+            items
+        }}>
+            <Box role="menu" onKeyDown={onKeyDown}>
+                {children}
+            </Box>
+        </DropdownProviderInternal>
+    );
+};

@@ -1,7 +1,7 @@
 import * as React from "react";
 import { PopoverRoot } from "./PopoverRoot";
-import { PopoverTrigger } from "./PopoverTrigger";
-import { PopoverContent } from "./PopoverContent";
+import { PopoverInner } from "./PopoverInner";
+
 
 type BaseProps = {
     trigger: React.ReactNode;
@@ -10,16 +10,21 @@ type BaseProps = {
     onOpenChange?: (open: boolean) => void;
     trapFocus?: boolean;
 };
+type PopoverRenderProps = {
+    open: boolean;
+    close: () => void;
+};
 
-type ContentVariant =
-    | { content: React.ReactNode; children?: never }
-    | { children: React.ReactNode; content?: never };
+type ContentVariant = {
+    children:
+    | React.ReactNode
+    | ((props: PopoverRenderProps) => React.ReactNode);
+}
 
 export type PopoverProps = BaseProps & ContentVariant;
 
 export const Popover: React.FC<PopoverProps> = ({
     trigger,
-    content,
     children,
     open,
     defaultOpen,
@@ -32,13 +37,9 @@ export const Popover: React.FC<PopoverProps> = ({
             defaultOpen={defaultOpen}
             onOpenChange={onOpenChange}
         >
-            <PopoverTrigger asChild>
-                {trigger}
-            </PopoverTrigger>
-
-            <PopoverContent trapFocus={trapFocus}>
-                {content ?? children}
-            </PopoverContent>
+            <PopoverInner trigger={trigger} trapFocus={trapFocus}>
+                {children}
+            </PopoverInner>
         </PopoverRoot>
     );
 };
