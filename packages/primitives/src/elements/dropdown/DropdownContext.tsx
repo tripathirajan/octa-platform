@@ -1,20 +1,15 @@
 import { createContext } from "../../internal";
+import type { CollectionItem } from "../../internal/useCollection";
 
 export type DropdownItemMeta = {
     onSelect?: () => void;
 };
 
-export type RegisteredItem = {
-    id: string;
-    ref: React.RefObject<HTMLElement | null>;
-    disabled?: boolean;
-    meta?: DropdownItemMeta
-};
 
 type DropdownContextValue = {
     close: () => void;
-    items: RegisteredItem[];
-    registerItem: (item: RegisteredItem) => void;
+    items: CollectionItem<DropdownItemMeta>[];
+    registerItem: (item: CollectionItem<DropdownItemMeta>) => void;
     getIndex: (id: string) => number;
     activeIndex: number;
     setActiveIndex: React.Dispatch<

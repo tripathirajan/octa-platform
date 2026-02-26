@@ -28,23 +28,28 @@ export const DropdownContent: React.FC<DropdownContentProps> = ({ open, close, c
         onEscape: close,
     });
 
+    const contextValue = React.useMemo(() => ({
+        registerItem: register,
+        getIndex,
+        activeIndex,
+        setActiveIndex,
+        close,
+        items
+    }), [register, getIndex, activeIndex, setActiveIndex, close, items]);
+
     // Focus sync
     React.useEffect(() => {
         if (!open) return;
-        items[activeIndex]?.ref.current?.focus();
-    }, [open, activeIndex, items]);
+        const node = items[activeIndex]?.ref.current;
+        if (node && node !== document.activeElement) {
+            node.focus();
+        }
+    }, [open, activeIndex]);
 
     if (!open) return null;
 
     return (
-        <DropdownProviderInternal value={{
-            registerItem: ({ meta, ...rest }) => register({ meta: { ...meta }, ...rest } as CollectionItem<DropdownItemMeta>),
-            getIndex,
-            activeIndex,
-            setActiveIndex,
-            close,
-            items
-        }}>
+        <DropdownProviderInternal value={contextValue}>
             <Box role="menu" onKeyDown={onKeyDown}>
                 {children}
             </Box>

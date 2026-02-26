@@ -4,7 +4,7 @@ import { createContext } from "../../internal/createContext";
 type PopoverContextValue = {
     open: boolean;
     setOpen: (v: boolean) => void;
-    triggerRef: React.RefObject<HTMLElement | null>;
+    triggerRef: React.MutableRefObject<HTMLElement | null>;
 };
 
 const [PopoverProviderInternal, usePopoverContext] =

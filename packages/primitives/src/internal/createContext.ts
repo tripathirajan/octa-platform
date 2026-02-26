@@ -5,7 +5,7 @@ import * as React from "react";
  * @description A tuple type for the return value of the createContext function. The first element is a React Provider component, and the second element is a hook to consume the context.
  * @template T - The type of the context value.
  * */
-export type CreateContextReturn<T> = [React.Provider<T>, () => T];
+export type CreateContextReturn<T> = [React.Provider<T | undefined>, () => T];
 
 /**
  * createContext

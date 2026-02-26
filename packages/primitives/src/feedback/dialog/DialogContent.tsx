@@ -1,10 +1,8 @@
 import * as React from "react";
-import { OverlayRoot, useOverlayBehavior, useOverlayContext } from "../../overlay";
-import { Box } from "../../layout/Box";
+import { OverlayRoot, useOverlayBehavior } from "../../overlay";
 import { useDialogContext } from "./DialogContext";
-import { useOverlayItem } from "../../overlay";
-
-type DialogContentProps = React.ComponentProps<typeof Box>;
+import { DialogContentInner } from "./DialogContentInner";
+import type { DialogContentProps } from "./DialogContentInner";
 
 export const DialogContent = React.forwardRef<
     HTMLElement,
@@ -17,19 +15,6 @@ export const DialogContent = React.forwardRef<
         titleId,
         descriptionId,
     } = useDialogContext();
-    const { overlayId } = useOverlayItem();
-    const { isTopMost } = useOverlayContext();
-
-    React.useEffect(() => {
-        if (!open || !isTopMost(overlayId)) return;
-
-        const originalOverflow = document.body.style.overflow;
-        document.body.style.overflow = "hidden";
-
-        return () => {
-            document.body.style.overflow = originalOverflow;
-        };
-    }, [open, overlayId, isTopMost]);
 
     const { shouldRender, overlayProps } = useOverlayBehavior({
         open,
@@ -41,15 +26,7 @@ export const DialogContent = React.forwardRef<
 
     return (
         <OverlayRoot {...overlayProps}>
-            <Box
-                {...props}
-                ref={ref}
-                id={contentId}
-                role="dialog"
-                aria-modal="true"
-                aria-labelledby={titleId}
-                aria-describedby={descriptionId}
-            />
+            <DialogContentInner {...props} contentId={contentId} titleId={titleId} descriptionId={descriptionId} />
         </OverlayRoot>
     );
 });

@@ -1,9 +1,10 @@
 {
     "compilerOptions": {
+        "baseUrl": ".",
         "composite": true,
         "paths": {
             "@octa/primitives": [
-                "packages/primitives/src"
+                "packages/primitives/src/*"
             ]
         },
         "target": "ESNext",

@@ -4,6 +4,7 @@ import { Element, ElementProps } from "../base/Element";
 type FocusScopeOwnProps = {
     trap?: boolean;
     autoFocus?: boolean;
+    tabIndex?: number;
 };
 
 type FocusScopeProps<E extends React.ElementType> =
@@ -28,7 +29,7 @@ const FocusScopeImpl = (
     ref: React.ForwardedRef<any>
 ) => {
     const containerRef = React.useRef<HTMLElement | null>(null);
-
+    const previouslyFocused = React.useRef<HTMLElement | null>(null);
     React.useImperativeHandle(ref, () => containerRef.current);
 
     React.useEffect(() => {
@@ -76,11 +77,22 @@ const FocusScopeImpl = (
         return () => node.removeEventListener("keydown", handleKeyDown);
     }, [trap, autoFocus]);
 
+    React.useEffect(() => {
+        if (autoFocus) {
+            previouslyFocused.current = document.activeElement as HTMLElement;
+        }
+
+        return () => {
+            previouslyFocused.current?.focus();
+        };
+    }, []);
+
     return (
         <Element
             {...props}
             as={as || "div"}
             ref={containerRef}
+            tabIndex={props.tabIndex ?? -1}
         />
     );
 };

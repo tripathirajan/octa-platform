@@ -37,7 +37,7 @@ export function mergeRefs<T>(...refs: PossibleRef<T>[]): React.RefCallback<T> {
       if (typeof ref === "function") {
         ref(node);
       } else {
-        (ref as React.RefObject<T | null>).current = node;
+        (ref as React.MutableRefObject<T | null>).current = node;
       }
     });
   };

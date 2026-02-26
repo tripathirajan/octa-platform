@@ -8,7 +8,7 @@ export type DialogContextValue = {
     titleId: string;
     descriptionId: string;
 
-    triggerRef: React.RefObject<HTMLElement | null>;
+    triggerRef: React.MutableRefObject<HTMLElement | null>;
 };
 
 const [DialogProviderInternal, useDialogContext] =

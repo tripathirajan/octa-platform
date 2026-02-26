@@ -12,7 +12,7 @@ export type DropdownItemProps = {
 export const DropdownItem = React.forwardRef<
     HTMLElement,
     DropdownItemProps
->(({ children, onSelect, disabled }, forwardedRef) => {
+>(({ children, onSelect, disabled = false }, forwardedRef) => {
     const { registerItem,
         getIndex,
         activeIndex,
@@ -25,7 +25,7 @@ export const DropdownItem = React.forwardRef<
 
     // Merge refs if needed
     React.useImperativeHandle(forwardedRef, () => ref.current as HTMLElement);
-
+    console.log('dropdown item rendered', children, { id, disabled });
     React.useEffect(() => {
         return registerItem({
             id,

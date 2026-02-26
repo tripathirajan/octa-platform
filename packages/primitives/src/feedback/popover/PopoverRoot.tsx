@@ -1,5 +1,6 @@
 import * as React from "react";
 import { PopoverProviderInternal } from "./PopoverContext";
+import { OverlayProvider } from "../../overlay";
 
 type PopoverRootProps = {
     children: React.ReactNode;
@@ -31,9 +32,11 @@ export const PopoverRoot: React.FC<PopoverRootProps> = ({
     const triggerRef = React.useRef<HTMLElement | null>(null);
 
     return (
-        <PopoverProviderInternal value={{ open, setOpen, triggerRef }}>
-            {children}
-        </PopoverProviderInternal>
+        <OverlayProvider>
+            <PopoverProviderInternal value={{ open, setOpen, triggerRef }}>
+                {children}
+            </PopoverProviderInternal>
+        </OverlayProvider>
     );
 };
 
