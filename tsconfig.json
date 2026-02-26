@@ -1,0 +1,26 @@
+{
+    "compilerOptions": {
+        "composite": true,
+        "paths": {
+            "@octa/primitives": [
+                "packages/primitives/src"
+            ]
+        },
+        "target": "ESNext",
+        "module": "ESNext",
+        "jsx": "react-jsx",
+        "strict": true,
+        "esModuleInterop": true,
+        "forceConsistentCasingInFileNames": true,
+        "skipLibCheck": true,
+        "isolatedModules": true
+    },
+    "include": [
+        "packages",
+        "example"
+    ],
+    "exclude": [
+        "node_modules",
+        "dist"
+    ]
+}
