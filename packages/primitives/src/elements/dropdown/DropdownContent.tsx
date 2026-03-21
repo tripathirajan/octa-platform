@@ -16,7 +16,7 @@ export const DropdownContent: React.FC<DropdownContentProps> = ({ open, close, c
 
     const {
         activeIndex,
-        setActiveIndex,
+        moveTo,
         onKeyDown,
     } = useCompositeNavigation({
         itemCount: items.length,
@@ -32,10 +32,10 @@ export const DropdownContent: React.FC<DropdownContentProps> = ({ open, close, c
         registerItem: register,
         getIndex,
         activeIndex,
-        setActiveIndex,
+        moveTo,
         close,
         items
-    }), [register, getIndex, activeIndex, setActiveIndex, close, items]);
+    }), [register, getIndex, activeIndex, close, items]);
 
     // Focus sync
     React.useEffect(() => {

@@ -5,16 +5,13 @@ export type DropdownItemMeta = {
     onSelect?: () => void;
 };
 
-
 type DropdownContextValue = {
-    close: () => void;
+    activeIndex: number;
     items: CollectionItem<DropdownItemMeta>[];
     registerItem: (item: CollectionItem<DropdownItemMeta>) => void;
     getIndex: (id: string) => number;
-    activeIndex: number;
-    setActiveIndex: React.Dispatch<
-        React.SetStateAction<number>
-    >;
+    close: () => void;
+    moveTo: (index: number) => void;
 };
 
 const [DropdownProviderInternal, useDropdownContext] = createContext<DropdownContextValue>("Dropdown")

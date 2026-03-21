@@ -16,7 +16,7 @@ export const DropdownItem = React.forwardRef<
     const { registerItem,
         getIndex,
         activeIndex,
-        setActiveIndex,
+        moveTo,
         close, } =
         useDropdownContext();
 
@@ -44,7 +44,7 @@ export const DropdownItem = React.forwardRef<
             ref={ref}
             tabIndex={isActive ? 0 : -1}
             aria-disabled={disabled}
-            onFocus={() => setActiveIndex(index)}
+            onFocus={() => moveTo(index)}
             onClick={() => {
                 if (!disabled) {
                     onSelect?.();

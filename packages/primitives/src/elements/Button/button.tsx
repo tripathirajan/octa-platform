@@ -76,6 +76,8 @@ const ButtonImpl = <
 
     return (
         <ButtonBase
+            role="button"
+            tabIndex={0}
             {...props}
             ref={ref}
             className={className}

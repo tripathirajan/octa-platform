@@ -1,7 +1,7 @@
 import * as React from "react";
 
 let globalId = 0;
-const PREFIX = "octal";
+const PREFIX = "octa";
 
 /**
  * useId
